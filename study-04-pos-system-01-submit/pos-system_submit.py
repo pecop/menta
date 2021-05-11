@@ -22,11 +22,11 @@ class Order:
         self.item_master=item_master
     
     # STEP2
-    def get_input_order_item_code(self):
+    def input_order_item_code(self):
         while True:
             try:
                 order_code = input("オーダーの商品コードを登録してください（商品コード:001〜003）>>")
-                if order_code in ["001", "002", "003"]:
+                if order_code in [m_item.item_code for m_item in self.item_master]:    
                     return order_code
                     break    
                 else:
@@ -131,7 +131,7 @@ def main():
     # order.add_item_order("003")
 
     # STEP2 
-    order_code = order.get_input_order_item_code()
+    order_code = order.input_order_item_code()
     # #STEP4
     order_unit = order.get_input_order_item_unit()
 
