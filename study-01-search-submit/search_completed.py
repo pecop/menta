@@ -7,31 +7,32 @@
 # STEP3
 import pandas as pd
 
-imported_source = pd.read_csv('source.csv')
-
-source = []
-
-for character in imported_source['キャラクターリスト']:
-    source.append(character)
+# csvの読み込み
+def read_csv(csv_file):
+    imported_source = pd.read_csv(csv_file)
+    source_list = []
+    for character in imported_source['キャラクターリスト']:
+        source_list.append(character)
+    return source_list
 
 ### 検索ツール
-def search():
+def search(source_list):
     word = input("鬼滅の登場人物の名前を入力してください >>> ")
     
     ### ここに検索ロジックを書く
-    
     # STEP1
-    if word in source:
-        print("{}が見つかりました".format(word))
+    if word in source_list:
+        print(f"{word}が見つかりました")
     else:
-        print("{}は見つかりませんでした".format(word))
+        print(f"{word}は見つかりませんでした")
         
         # STEP2
-        source.append(word)
+        source_list.append(word)
     
     # STEP4
-    df_source = pd.DataFrame(source, columns=['キャラクターリスト'])
+    df_source = pd.DataFrame(source_list, columns=['キャラクターリスト'])
     df_source.to_csv('source_output.csv', index=None, encoding='utf_8_sig')
 
 if __name__ == "__main__":
-    search()
+    source_list = read_csv('source.csv')
+    search(source_list)
