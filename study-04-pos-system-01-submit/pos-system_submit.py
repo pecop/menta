@@ -25,7 +25,8 @@ class Order:
     def input_order_item_code(self):
         while True:
             try:
-                m_item_code_list = [m_item.item_code for m_item in self.item_master].sort()
+                m_item_code_list = [m_item.item_code for m_item in self.item_master]
+                m_item_code_list.sort()
                 order_code = input(f"オーダーの商品コードを登録してください（商品コード:{m_item_code_list[0]}〜{m_item_code_list[-1]}）>>")
                 if order_code in m_item_code_list:    
                     return order_code
