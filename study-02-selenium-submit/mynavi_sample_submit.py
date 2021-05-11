@@ -35,19 +35,14 @@ def set_driver(driver_path, headless_flg):
 
 def log(text):
     now = datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
-    logStr = f'[{now}] {text}'
-    
+    logStr = f'[{now}] {text}'   
     with open(LOG_FILE_PATH, 'a', encoding='utf-8-sig') as f:
-        f.write(logStr + '\n')
-        
+        f.write(logStr + '\n')    
     print(logStr)
 
 def main():
-    
     log('処理開始')
-    
     search_keyword = input("検索したいキーワードを入力してください：")
-    
     log(f'検索キーワード：{search_keyword}')
 
     # driverを起動
@@ -59,12 +54,10 @@ def main():
     # Webサイトを開く
     driver.get("https://tenshoku.mynavi.jp/")
     time.sleep(5)
-
     try:
         # ポップアップを閉じる
         driver.execute_script('document.querySelector(".karte-close").click()')
         time.sleep(5)
-
     except:
         pass
 
@@ -81,7 +74,6 @@ def main():
     fail = 0
 
     while True:
-
         log(f'{page}ページ目抽出スタート')
 
         # ページ終了まで繰り返し取得
@@ -94,36 +86,27 @@ def main():
 
         # 1ページ分繰り返し
         log(f'{page}ページ目 - 求人数：{len(name_list)}件')
-
-        for name, employment_status, table in zip(name_list, employment_status_list, table_list):
-            
+        for name, employment_status, table in zip(name_list, employment_status_list, table_list):        
             try:
                 exp_name_list.append(name.text)
                 fin_employment_status_list.append(employment_status.text)
-
                 title_list = table.find_elements_by_tag_name('th')
                 content_list = table.find_elements_by_tag_name('td')
-
                 for title, content in zip(title_list, content_list):
                     if title.text == '勤務地':
                         fin_workplace_list.append(content.text)
                     elif title.text == '給与':
-                        fin_salary_list.append(content.text)
-                
+                        fin_salary_list.append(content.text)          
                 success += 1
-                log(f'{count}件目抽出完了')
-           
+                log(f'{count}件目抽出完了')       
             except:
                 fail += 1
-                log(f'{count}件目抽出失敗')
-                
+                log(f'{count}件目抽出失敗')         
             finally:
                 count += 1
 
         log(f'{page}ページ目抽出完了')
-
         next_page = driver.find_elements_by_class_name('iconFont--arrowLeft')
-
         if len(next_page) > 0:
             url = next_page[0].get_attribute('href')
             driver.get(url)
@@ -142,9 +125,7 @@ def main():
     }
 
     df = pd.DataFrame(d)
-
     log(f'処理完了　抽出求人数：{len(df)}件　成功件数：{success}件 失敗件数：{fail}件')
-    
     now = datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
     df.to_csv(CSV_FILE_PATH.format(keyword=search_keyword, now=now), index=False, encoding='utf-8-sig')
     
