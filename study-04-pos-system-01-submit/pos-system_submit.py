@@ -25,14 +25,15 @@ class Order:
     def input_order_item_code(self):
         while True:
             try:
-                order_code = input("オーダーの商品コードを登録してください（商品コード:001〜003）>>")
-                if order_code in [m_item.item_code for m_item in self.item_master]:    
+                m_item_code_list = [m_item.item_code for m_item in self.item_master].sort()
+                order_code = input(f"オーダーの商品コードを登録してください（商品コード:{m_item_code_list[0]}〜{m_item_code_list[-1]}）>>")
+                if order_code in m_item_code_list:    
                     return order_code
                     break    
                 else:
-                    print("商品コードを001〜003の値で入力してください")  
+                    print(f"商品コードを{m_item_code_list[0]}〜{m_item_code_list[-1]}の値で入力してください")  
             except:
-                print("商品コードを001〜003の値で入力してください")
+                print(f"商品コードを{m_item_code_list[0]}〜{m_item_code_list[-1]}の値で入力してください")
 
     # STEP4
     def get_input_order_item_unit(self):
