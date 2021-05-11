@@ -5,18 +5,18 @@ import eel
 # STEP6
 def kimetsu_search(word, csv_file):
     # 検索対象取得
-    df=pd.read_csv("./{}".format(csv_file))
+    df=pd.read_csv(f"./{csv_file}")
     # df=pd.read_csv("./source.csv")
     source=list(df["name"])
 
     # 検索
     if word in source:
-        print("『{}』はいります".format(word))
+        print(f"『{word}』はいります")
         # STEP3
-        eel.view_log_js("『{}』はいます".format(word))
+        eel.view_log_js(f"『{word}』はいます")
     else:
-        print("『{}』はいません".format(word))
-        eel.view_log_js("『{}』はいません".format(word))
+        print(f"『{word}』はいません")
+        eel.view_log_js(f"『{word}』はいません")
         # 追加
         #add_flg=input("追加登録しますか？(0:しない 1:する)　＞＞　")
         #if add_flg=="1":
