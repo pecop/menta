@@ -6,23 +6,16 @@
     <body>
         <h2>POSシステム</h2>
 
-        <!-- STEP1 -->
         <div>
             <span>商品マスターCSVファイル名</span><input id='csv_file' type='text'><br>
             <span>商品コード</span><input id='item_code' type='text'><br>
-            <span>商品個数</span><input id='item_unit' type='text'><button id='item_print' type='button'>オーダー商品表示</button><br>
+            <span>商品個数</span><input id='item_unit' type='text'><button id='item_print' type='button'>注文内容表示</button><br>
             <span>支払い金額</span><input id='payment' type='text'><button id='settlement' type='button'>精算</button>
             <textarea id='result' class='log-view-area'></textarea>
         </div>
-        <!-- <div>
-            <span>支払い金額</span><input id='payment' type='text'><br><button id='settlement' type='button'>精算</button>
-            <textarea id='settlement_calc' class='settlement-print-area'></textarea>
-        </div> -->
         <script type="text/javascript" src="./eel.js"></script>
-        <script>
-            // const search = document.getElementById('search');
+        <!-- <script>
             item_print.addEventListener('click', () => {
-                // STEP2
                 if (csv_file.value === '') {
                     alert('商品マスターのcsvファイルを入力してください');
                 } else if (item_code.value === '') {
@@ -30,7 +23,6 @@
                 } else if (item_unit.value === '') {
                     alert('商品個数を入力してください');
                 } else {
-                    // order = eel.get_item_master_from_csv(csv_file.value, item_code.value, item_unit.value);
                     eel.main_process(csv_file=csv_file.value, item_code=item_code.value, item_unit=item_unit.value);
                     eel.expose(view_log_js);
                     function view_log_js(text){
@@ -42,12 +34,33 @@
                 if (payment.value === '') {
                     alert('支払い金額を入力してください');
                 } else {
-                    // eel.process_settlement(payment.value, order);
                     eel.main_process(payment=payment.value);
+                }
+            });
+        </script> -->
+        <script>
+            item_print.addEventListener('click', () => {
+                // STEP2
+                if (csv_file.value === '') {
+                    alert('商品マスターのcsvファイルを入力してください');
+                } else if (item_code.value === '') {
+                    alert('商品コードを入力してください');
+                } else if (item_unit.value === '') {
+                    alert('商品個数を入力してください');
+                } else {
+                    const order = eel.process_order(csv_file=csv_file.value, item_code=item_code.value, item_unit=item_unit.value);
+                    // eel.process_order(csv_file=csv_file.value, item_code=item_code.value, item_unit=item_unit.value);
                     eel.expose(view_log_js);
                     function view_log_js(text){
                         result.value += text + '\n'; 
                     }
+                }
+            });
+            settlement.addEventListener('click', () => {
+                if (payment.value === '') {
+                    alert('支払い金額を入力してください');
+                } else {
+                    eel.process_settlement(payment.value, order);
                 }
             });
         </script>
