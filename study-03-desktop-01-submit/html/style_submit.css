@@ -1,10 +1,4 @@
-/*STEP1*/
-button {
-	margin-left: 5px; 
-}
-
-/*STEP5*/
-.log-view-area {
-	width: 400px;
-	height: 500px
+/* STEP1 */
+div{
+	margin-bottom: 5px;
 }
