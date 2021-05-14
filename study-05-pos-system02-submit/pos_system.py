@@ -74,29 +74,27 @@ class Order:
                     }
         print(f'【注文内容】')
         eel.view_log_js('【注文内容】')
-        print(f'商品名: {m_item.item_name}')
-        eel.view_log_js(f'商品名: {m_item.item_name}')
-        print(f'単価: {m_item.price}円')
-        eel.view_log_js(f'単価: {m_item.price}円')
-        print(f'注文数: {self.sum_unit}個')
-        eel.view_log_js(f'注文数: {self.sum_unit}個')
-        print(f'合計金額: {self.sum_price}円')
-        eel.view_log_js(f'合計金額: {self.sum_price}円')
+        print(f'商品名: {self.receipt_dic["商品名"]}')
+        eel.view_log_js(f'商品名: {self.receipt_dic["商品名"]}')
+        print(f'単価: {self.receipt_dic["単価"]}円')
+        eel.view_log_js(f'単価: {self.receipt_dic["単価"]}円')
+        print(f'注文数: {self.receipt_dic["注文数"]}個')
+        eel.view_log_js(f'注文数: {self.receipt_dic["注文数"]}個')
+        print(f'合計金額: {self.receipt_dic["合計金額"]}円')
+        eel.view_log_js(f'合計金額: {self.receipt_dic["合計金額"]}円')
 
     def input_payment(self, payment):
-        while True:
-            try:
-                if payment >= self.sum_price:
-                    eel.view_log_js(f'合計金額: {self.sum_price}円')
-                    eel.view_log_js(f"支払い金額:　{payment}円")
-                    return payment
-                    break
-                else:
-                    print(f"支払い金額を合計金額:{self.sum_price}円以上の整数で入力してください")
-                    eel.view_log_js(f"支払い金額を合計金額:{self.sum_price}円以上の整数で入力してください")   
-            except:
+        try:
+            if payment >= self.sum_price:
+                eel.view_log_js(f'合計金額: {self.sum_price}円')
+                eel.view_log_js(f"支払い金額:　{payment}円")
+                return payment
+            else:
                 print(f"支払い金額を合計金額:{self.sum_price}円以上の整数で入力してください")
-                eel.view_log_js(f"支払い金額を合計金額:{self.sum_price}円以上の整数で入力してください")
+                eel.view_log_js(f"支払い金額を合計金額:{self.sum_price}円以上の整数で入力してください")   
+        except:
+            print(f"支払い金額を合計金額:{self.sum_price}円以上の整数で入力してください")
+            eel.view_log_js(f"支払い金額を合計金額:{self.sum_price}円以上の整数で入力してください")
 
     def calc_change(self, payment):
         self.payment = payment
@@ -118,6 +116,7 @@ def get_item_master_from_csv(csv_file):
         print("csvファイルを読み込めました")
     except:
         print("csvファイルを読み込めませんでした")
+    print('【商品マスター】')
     for item_code, item_name, price in zip(read_item_master['item_code'], read_item_master['item_name'], read_item_master['price']):
         print(item_code, item_name, price)
         item_master.append(Item(item_code, item_name, price))
@@ -154,7 +153,8 @@ def process_order(csv_file, item_code, item_unit):
     # 商品マスタ登録
     item_master = get_item_master_from_csv(csv_file)
     # 注文登録/表示
-    order=Order(item_master)
+    global order
+    order = Order(item_master)
     order_code = order.input_order_item_code(item_code)
     order_unit = order.input_order_item_unit(item_unit)
     order.add_item_order(order_code, order_unit) 

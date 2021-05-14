@@ -12,9 +12,8 @@ size=(700,600)
 #     pos_system.main_process(csv_file, item_code, item_unit, payment)
 
 @eel.expose
-def process_order(csv_file=None, item_code=None, item_unit=None):
+def process_order(csv_file, item_code, item_unit):
     order = pos_system.process_order(csv_file, item_code, item_unit)
-    # pos_system.process_order(csv_file, item_code, item_unit)
     return order
 
 @eel.expose

@@ -39,8 +39,10 @@
             });
         </script> -->
         <script>
+            let order = null;
+            // console.log(Object.prototype.toString.call(order));
+            // console.log(order);
             item_print.addEventListener('click', () => {
-                // STEP2
                 if (csv_file.value === '') {
                     alert('商品マスターのcsvファイルを入力してください');
                 } else if (item_code.value === '') {
@@ -48,8 +50,9 @@
                 } else if (item_unit.value === '') {
                     alert('商品個数を入力してください');
                 } else {
-                    const order = eel.process_order(csv_file=csv_file.value, item_code=item_code.value, item_unit=item_unit.value);
-                    // eel.process_order(csv_file=csv_file.value, item_code=item_code.value, item_unit=item_unit.value);
+                    order = eel.process_order(csv_file.value, item_code.value, item_unit.value);
+                    // console.log(Object.prototype.toString.call(order));
+                    // console.log(order);
                     eel.expose(view_log_js);
                     function view_log_js(text){
                         result.value += text + '\n'; 
@@ -60,7 +63,15 @@
                 if (payment.value === '') {
                     alert('支払い金額を入力してください');
                 } else {
-                    eel.process_settlement(payment.value, order);
+                    console.log('精算スタート');
+                    try {
+                        // console.log(Object.prototype.toString.call(order));
+                        // console.log(order);
+                        eel.process_settlement(payment.value, order);
+                    } catch(e) {
+                        console.log(e.message);
+                    }
+                    
                 }
             });
         </script>
