@@ -1,24 +1,22 @@
 import eel
 import desktop
-# import search
 import pos_system
 
 app_name="html"
 end_point="index.html"
 size=(700,600)
 
-# @eel.expose
-# def main_process(csv_file=None, item_code=None, item_unit=None, payment=None):
-#     pos_system.main_process(csv_file, item_code, item_unit, payment)
 
 @eel.expose
-def process_order(csv_file, item_code, item_unit):
-    order = pos_system.process_order(csv_file, item_code, item_unit)
-    return order
+def process_item_master_registration(csv_file):
+    pos_system.process_item_master_registration(csv_file)
 
 @eel.expose
-def process_settlement(payment, order):
-    pos_system.process_settlement(payment, order)
+def process_order(item_code, item_unit):
+    pos_system.process_order(item_code, item_unit)
+
+@eel.expose
+def process_settlement(payment):
+    pos_system.process_settlement(payment)
     
 desktop.start(app_name,end_point,size)
-#desktop.start(size=size,appName=app_name,endPoint=end_point)
