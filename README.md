@@ -15,3 +15,6 @@
 
 ## study-05-pos-system-02-submit
 課題5の提出内容
+
+## study-06-api-main_submit
+課題6の提出内容
