@@ -1,0 +1,20 @@
+# STEP1
+https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706
+?applicationId=1039685405445906192
+&format=json
+&keyword=%E7%A6%8F%E8%A2%8B
+&sort=%2BitemPrice
+
+###
+# STEP3
+https://app.rakuten.co.jp/services/api/Product/Search/20170426
+?applicationId=1039685405445906192
+&format=json
+&keyword=%E3%83%8E%E3%83%BC%E3%83%88%E3%83%91%E3%82%BD%E3%82%B3%E3%83%B3
+&genreId=100040
+
+###
+# STEP4
+https://app.rakuten.co.jp/services/api/IchibaItem/Ranking/20170628
+?applicationId=1039685405445906192
+&genreId=100283

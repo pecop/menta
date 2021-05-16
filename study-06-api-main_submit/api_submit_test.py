@@ -13,7 +13,7 @@ def get_api(url, payload):
     return result.json()
 
 
-def main():
+def test_main():
     # keyword = "鬼滅"
     # url = "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706?format=json&keyword={}&applicationId=1019079537947262807".format(
     #     keyword)
@@ -105,5 +105,7 @@ def main():
     ranking_df = pd.DataFrame(ranking_dict)
     now = datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')
     ranking_df.to_csv(f'item_ranking_{now}.csv', index=False, encoding='utf-8-sig')
+    ## STEP5
+    assert len(ranking_df) == 30
 
-main()
+test_main()
