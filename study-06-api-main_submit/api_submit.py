@@ -105,5 +105,6 @@ def main():
     ranking_df = pd.DataFrame(ranking_dict)
     now = datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')
     ranking_df.to_csv(f'item_ranking_{now}.csv', index=False, encoding='utf-8-sig')
+    return ranking_df
 
 main()
