@@ -4,7 +4,8 @@ import search_submit
 
 app_name="html"
 end_point="index_submit.html"
-size=(700,600)
+# size=(700,600)
+size=(900,1000)
 
 # STEP6
 @ eel.expose

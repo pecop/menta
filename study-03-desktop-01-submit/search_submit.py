@@ -26,3 +26,4 @@ def kimetsu_search(word, csv_file):
     df=pd.DataFrame(source,columns=["name"])
     df.to_csv("./source.csv",encoding="utf_8-sig")
     print(source)
+    eel.view_log_js(f"最新リスト：{source}")
