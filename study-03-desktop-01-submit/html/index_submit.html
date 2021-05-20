@@ -4,43 +4,64 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <!-- <link rel="stylesheet" href="./style_submit.css"> -->
+
+        <!-- おまけ -->
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        
-        <link rel="stylesheet" href="./style_submit.css">
         
         <title>eelテスト</title>
     </head>
     <body>
-        <h2 class="text-center bg-primary text-light">eelテスト</h2>
-
         <!-- STEP1 -->
-        <div class="form-inline">
-            <div class="col-auto">
-                <label for="csv_file" class="text-left">CSVファイル名</label>
-                <input type="text" class="form-control" id="csv_file" placeholder="CSVファイル名を入力">
-            </div>
-            <div class="col-auto">
-                <label for="search_word" class="text-left">検索ワード</label>
-                <input type="text" class="form-control" id="search_word" placeholder="検索ワードを入力">
-            </div>
-            <div class="col-auto">
-                <button class="btn btn-primary" id='search' type='button'>検索</button>
-            </div>
+        <!-- おまけ -->
+        <header>
+            <h2 class="text-center bg-primary text-light py-2">eelテスト</h2>
+        </header>
+        <div class="container mt-4">
+            <!-- STEP2 -->
+            <form class="needs-validation" action="" novalidate> 
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="csv_file">CSVファイル名</label>
+                        <input class="form-control" type="text" name="csv_file" id="csv_file" placeholder="source.csv" required>
+                        <!-- STEP2 -->
+                        <p class="invalid-feedback">CSVファイル名を入力してください</p>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="search_word">検索ワード</label>
+                        <input class="form-control" type="text" name="search_word" id="search_word" placeholder="ねずこ" required>
+                        <!-- STEP2 -->
+                        <p class="invalid-feedback">検索ワードを入力してください</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" id='search' type='button'>検索</button>
+                </div>
+                <div class="form-group">
+                    <label for="result">結果</label>
+                    <textarea class="form-control" name="result" id="result" style="height: 350px;" readonly></textarea>
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-            <div class="col-auto">
-                <label for="result" class="text-center">結果</label>
-                <textarea class="form-control" id="result" style="height: 350px;"></textarea>
-            </div>
-        </div>
+        
         <script type="text/javascript" src="./eel.js"></script>
         <script>
             search.addEventListener('click', () => {
                 // STEP2
-                if (search_word.value === '') {
-                    alert('検索ワードを入力してください');
-                } else {
+                // if (search_word.value === '') {
+                //     alert('検索ワードを入力してください');
+                // } else {
+                //     // STEP6
+                //     eel.kimetsu_search(search_word.value, csv_file.value);
+                //     // STEP4
+                //     eel.expose(view_log_js);
+                //     function view_log_js(text){
+                //         result.value += text + '\n'; 
+                //     }
+                // }
+                if (csv_file.value && search_word.value) {
                     // STEP6
                     eel.kimetsu_search(search_word.value, csv_file.value);
                     // STEP4
@@ -56,5 +77,26 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- Input Validation Check -->
+        <script>
+            // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function() {
+              'use strict';
+              window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                  form.addEventListener('click', function(event) {
+                    if (form.checkValidity() === false) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                  }, false);
+                });
+              }, false);
+            })();
+        </script>
     </body>
 </html>
