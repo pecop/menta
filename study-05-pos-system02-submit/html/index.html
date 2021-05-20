@@ -1,23 +1,71 @@
 <html>
     <head>
         <title>POSシステム</title>
-        <link rel="stylesheet" href="./style.css">
+        <!-- <link rel="stylesheet" href="./style.css"> -->
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
-        <h2>POSシステム</h2>
-        <div>
-            <span>商品メニューCSVファイル名</span><input id='csv_file' type='text'><button id='item_master_read' type='button'>商品メニュー登録</button><br>
-            <span>商品コード</span><input id='item_code' type='text'><br>
-            <span>商品個数</span><input id='item_unit' type='text'><button id='item_print' type='button'>注文内容表示</button><br>
-            <span>支払い金額</span><input id='payment' type='text'><button id='settlement' type='button'>精算</button>
-            <textarea id='result' class='log-view-area'></textarea>
+        <header>
+            <h2 class="text-center bg-primary text-light py-2">POSシステム</h2>
+        </header>
+        <div class="container mt-04">
+            <form class="needs-validation1" action="" novalidate>
+                <div class="form-group">
+                    <label for="csv_file">商品メニューCSVファイル名</label>
+                    <input class="form-control" type='text' name="csv_file" id='csv_file' required>
+                    <p class="invalid-feedback">CSVファイル名を入力してください</p>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" id='item_master_read' type='button'>商品メニュー登録</button>
+                </div>
+            </form>
+            <form class="needs-validation2" action="" novalidate>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="item_code">商品コード</label>
+                        <input class="form-control" type='text' name="item_code" id='item_code' required>
+                        <p class="invalid-feedback">商品コードを入力してください</p>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="item_unit">商品個数</label>
+                        <input class="form-control" type='text' name="item_unit" id='item_unit' required>
+                        <p class="invalid-feedback">商品個数を入力してください</p>
+                    </div>        
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" id='item_print' type='button'>注文内容表示</button>
+                </div>
+            </form>
+            <form class="needs-validation3" action="" novalidate>
+                <div class="form-group">
+                    <label for="payment">支払い金額</label>
+                    <input class="form-control" type='text' name="payment" id='payment' required>
+                    <p class="invalid-feedback">支払い金額を入力してください</p>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" id='settlement' type='button'>精算</button>
+                </div>
+                <div class="form-group">
+                    <label for="result">結果</label>
+                    <textarea class="form-control" name="result" id="result" style="height: 600px;" readonly></textarea>
+                </div>
+            </form>
         </div>
         <script type="text/javascript" src="./eel.js"></script>
         <script>
             item_master_read.addEventListener('click', () => {
-                if (csv_file.value === '') {
-                    alert('商品メニューのcsvファイルを入力してください');
-                } else {
+                // if (csv_file.value === '') {
+                //     alert('商品メニューのcsvファイルを入力してください');
+                // } else {
+                //     eel.process_item_master_registration(csv_file.value);
+                //     eel.expose(view_log_js);
+                //     function view_log_js(text){
+                //         result.value += text + '\n'; 
+                //     }
+                // }
+                if (csv_file.value) {
                     eel.process_item_master_registration(csv_file.value);
                     eel.expose(view_log_js);
                     function view_log_js(text){
@@ -26,26 +74,89 @@
                 }
             });
             item_print.addEventListener('click', () => {
-                if (item_code.value === '') {
-                    alert('商品コードを入力してください');
-                } else if (item_unit.value === '') {
-                    alert('商品個数を入力してください');
-                } else {
+                // if (item_code.value === '') {
+                //     alert('商品コードを入力してください');
+                // } else if (item_unit.value === '') {
+                //     alert('商品個数を入力してください');
+                // } else {
+                //     eel.process_order(item_code.value, item_unit.value);
+                //     eel.expose(view_log_js);
+                //     function view_log_js(text){
+                //         result.value += text + '\n'; 
+                //     }
+                // }
+                if (item_code.value && item_unit.value) {
                     eel.process_order(item_code.value, item_unit.value);
-                    eel.expose(view_log_js);
-                    function view_log_js(text){
-                        result.value += text + '\n'; 
-                    }
+                    // eel.expose(view_log_js);
+                    // function view_log_js(text){
+                    //     result.value += text + '\n'; 
+                    // }
                 }
             });
             settlement.addEventListener('click', () => {
-                if (payment.value === '') {
-                    alert('支払い金額を入力してください');
-                } else {
+                // if (payment.value === '') {
+                //     alert('支払い金額を入力してください');
+                // } else {
+                //     console.log('精算スタート');
+                //     eel.process_settlement(payment.value);
+                // }
+                if (payment.value) {
                     console.log('精算スタート');
                     eel.process_settlement(payment.value);
                 }
             });
+        </script>
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- Input Validation Check -->
+        <script>
+            // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function() {
+              'use strict';
+              window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                // var forms = document.getElementsByClassName('needs-validation');
+                var forms1 = document.getElementsByClassName('needs-validation1');
+
+                var forms2 = document.getElementsByClassName('needs-validation2');
+
+                var forms3 = document.getElementsByClassName('needs-validation3');
+
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms1, function(form) {
+                //   form.addEventListener('click', function(event) {
+                  item_master_read.addEventListener('click', function(event) {
+                    if (form.checkValidity() === false) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                  }, false);
+                });
+
+                var validation = Array.prototype.filter.call(forms2, function(form) {
+                  item_print.addEventListener('click', function(event) {
+                    if (form.checkValidity() === false) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                  }, false);
+                });
+
+                var validation = Array.prototype.filter.call(forms3, function(form) {
+                  settlement.addEventListener('click', function(event) {
+                    if (form.checkValidity() === false) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                  }, false);
+                });
+              }, false);
+            })();
         </script>
     </body>
 </html>

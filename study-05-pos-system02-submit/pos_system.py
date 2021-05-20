@@ -28,9 +28,9 @@ class Order:
             if order_code in m_item_code_list:    
                 return order_code    
             else:
-                eel.view_log_js(f"商品コードを{m_item_code_list[0]}〜{m_item_code_list[-1]}の値で入力してください\n")
+                eel.view_log_js(f"[{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] 商品コードを{m_item_code_list[0]}〜{m_item_code_list[-1]}の値で入力してください\n")
         except:
-            eel.view_log_js(f"\商品コードを{m_item_code_list[0]}〜{m_item_code_list[-1]}の値で入力してください\n")
+            eel.view_log_js(f"[{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] 商品コードを{m_item_code_list[0]}〜{m_item_code_list[-1]}の値で入力してください\n")
 
     def input_order_item_unit(self, item_unit):
         try:
@@ -38,9 +38,9 @@ class Order:
             if order_unit > 0:
                 return order_unit
             else:
-                eel.view_log_js("個数を1以上の整数で入力してください\n")
+                eel.view_log_js(f"[{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] 個数を1以上の整数で入力してください\n")
         except:
-            eel.view_log_js("個数を1以上の整数で入力してください\n")
+            eel.view_log_js(f"[{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] 個数を1以上の整数で入力してください\n")
 
     def add_item_order(self,item_code, item_unit):
         self.item_code = item_code
@@ -78,9 +78,9 @@ class Order:
                 eel.view_log_js(f"支払い金額:　{payment}円")
                 return payment
             else:
-                eel.view_log_js(f"支払い金額を合計金額:{self.sum_price}円以上の整数で入力してください")   
+                eel.view_log_js(f"[{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] 支払い金額を合計金額:{self.sum_price}円以上の整数で入力してください")   
         except:
-            eel.view_log_js(f"支払い金額を合計金額:{self.sum_price}円以上の整数で入力してください")
+            eel.view_log_js(f"[{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] 支払い金額を合計金額:{self.sum_price}円以上の整数で入力してください")
 
     def calc_change(self, payment):
         self.payment = payment
@@ -100,11 +100,12 @@ def get_item_master_from_csv(csv_file):
     if os.path.exists(csv_file_path):
         try:
             read_item_master = pd.read_csv(csv_file_path, dtype=object)
+            eel.view_log_js(f"[{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] 入力されたcsvファイルを読み込みました\n")
+            eel.view_log_js('【商品マスター】')
         except:
-            eel.view_log_js(f"入力されたcsvファイルは存在しません\n")
+            eel.view_log_js(f"[{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] 入力されたcsvファイルは存在しません\n")
     else:
-        eel.view_log_js(f"入力されたcsvファイルは存在しません\n")
-    eel.view_log_js('【商品マスター】')
+        eel.view_log_js(f"[{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] 入力されたcsvファイルは存在しません\n")
     for item_code, item_name, price in zip(read_item_master['item_code'], read_item_master['item_name'], read_item_master['price']):
         eel.view_log_js(f'{item_code}' + ' ' + f'{item_name}' + ' ' + f'{price}円')
         item_master.append(Item(item_code, item_name, price))

@@ -4,7 +4,8 @@ import pos_system
 
 app_name="html"
 end_point="index.html"
-size=(700,600)
+# size=(700,600)
+size=(900,1000)
 
 
 @eel.expose
