@@ -56,8 +56,9 @@ def main():
     time.sleep(5)
     try:
         # ポップアップを閉じる
-        driver.execute_script('document.querySelector(".karte-close").click()')
-        time.sleep(5)
+        while driver.find_element_by_class_name("karte-close"):
+            driver.execute_script('document.querySelector(".karte-close").click()')
+            time.sleep(5)
     except:
         pass
 
