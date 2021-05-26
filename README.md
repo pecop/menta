@@ -18,3 +18,12 @@
 
 ## study-06-api-main_submit
 課題6の提出内容
+
+## study-07-translate-main
+課題7の提出内容
+
+## study-08-threading-main
+課題8の提出内容
+
+## study-09-tweet-bot-main
+課題9の提出内容
