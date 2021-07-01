@@ -1,104 +1,121 @@
 <html>
-    <head>
-        <title>翻訳システム</title>
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    </head>
-    <body>
-        <header>
-            <h2 class="text-center bg-primary text-light py-2">翻訳システム</h2>
-        </header>
-        <div class="container mt-04">
-            <form class="needs-validation" action="" novalidate>
-                <div class="form-group">
-                    <label for="translate">翻訳テキスト</label>
-                    <textarea class="form-control" type='text' name="input_text" id='input_text' placeholder='翻訳するテキストを50文字以内で入力してください' required></textarea>
-                    <p class="invalid-feedback">翻訳するテキストを入力してください</p>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="src_lang">翻訳前の言語</label>
-                        <select class="form-select form-control" type='text' name="src_lang" id='src_lang' aria-label="翻訳テキストの言語を選択してください" required>
-                            <option selected value="ja">日本語</option>
-                            <option value="en">英語</option>
-                            <option value="ko">韓国語</option>
-                            <option value="zh">中国語</option>
-                            <option value="fr">フランス語</option>
-                            <option value="it">イタリア語</option>
-                            <option value="de">ドイツ語</option>
-                            <option value="es">スペイン語</option>
-                            <option value="nl">オランダ語</option>
-                            <option value="sv">スウェーデン語</option>
-                            <option value="he">ヘブライ語</option>
-                        </select>
-                        <p class="invalid-feedback">翻訳元の言語を選択してください</p>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="dest_lang">翻訳後の言語</label>
-                        <select class="form-select form-control" type='text' name="dest_lang" id='dest_lang' aria-label="翻訳先の言語を選択してください" required>
-                            <option selected value="en">英語</option>
-                            <option value="ja">日本語</option>
-                            <option value="ko">韓国語</option>
-                            <option value="zh">中国語</option>
-                            <option value="fr">フランス語</option>
-                            <option value="it">イタリア語</option>
-                            <option value="de">ドイツ語</option>
-                            <option value="es">スペイン語</option>
-                            <option value="nl">オランダ語</option>
-                            <option value="sv">スウェーデン語</option>
-                            <option value="he">ヘブライ語</option>
-                        </select>
-                        <p class="invalid-feedback">翻訳先の言語を選択してください</p>
-                    </div>        
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-primary " id='translate' type='button'>翻訳</button>
-                </div>
-            </form>
+<head>
+    <title>翻訳ツール</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <header>
+        <h2 class="text-center bg-primary text-light py-2">翻訳ツール</h2>
+    </header>
+    <div class="container mt-04">
+        <form class="needs-validation" action="" novalidate>
             <div class="form-group">
-                <label for="result">翻訳結果</label>
-                <textarea class="form-control" name="result" id="result" style="height: 600px;" readonly></textarea>
+                <label for="translate">翻訳テキスト</label>
+                <textarea class="form-control" type='text' name="input_text" id='input_text'
+                    placeholder='翻訳するテキストを50文字以内で入力してください' required></textarea>
+                <p class="invalid-feedback">翻訳するテキストを入力してください</p>
             </div>
+            <div class="form-row">
+                <div class="form-group col-md-5">
+                    <label for="src_lang">翻訳前の言語</label>
+                    <select class="form-select form-control" type='text' name="src_lang" id='src_lang'
+                        aria-label="翻訳テキストの言語を選択してください">
+                        <option selected value="ja">日本語</option>
+                        <option value="en">英語</option>
+                        <option value="ko">韓国語</option>
+                        <option value="zh">中国語</option>
+                        <option value="fr">フランス語</option>
+                        <option value="it">イタリア語</option>
+                        <option value="de">ドイツ語</option>
+                        <option value="es">スペイン語</option>
+                        <option value="nl">オランダ語</option>
+                        <option value="sv">スウェーデン語</option>
+                        <option value="he">ヘブライ語</option>
+                    </select>
+                    <!-- <p class="invalid-feedback">翻訳元の言語を選択してください</p> -->
+                </div>
+                <div class="form-group col-md-2 d-flex align-items-end justify-content-center">
+                    <button class="btn btn-dark" id='exchange' type='button'>入れ替え</button>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="dest_lang">翻訳後の言語</label>
+                    <select class="form-select form-control" type='text' name="dest_lang" id='dest_lang'
+                        aria-label="翻訳先の言語を選択してください">
+                        <option selected value="en">英語</option>
+                        <option value="ja">日本語</option>
+                        <option value="ko">韓国語</option>
+                        <option value="zh">中国語</option>
+                        <option value="fr">フランス語</option>
+                        <option value="it">イタリア語</option>
+                        <option value="de">ドイツ語</option>
+                        <option value="es">スペイン語</option>
+                        <option value="nl">オランダ語</option>
+                        <option value="sv">スウェーデン語</option>
+                        <option value="he">ヘブライ語</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" id='translate' type='button'>翻訳</button>
+                <button class="btn btn-dark" id='reset' type='button'>クリア</button>
+            </div>
+        </form>
+        <div class="form-group">
+            <label for="result">翻訳結果</label>
+            <textarea class="form-control" name="result" id="result" style="height: 600px;" readonly></textarea>
         </div>
-        
-        <script type="text/javascript" src="./eel.js"></script>
-        <script>
-            translate.addEventListener('click', () => {
-                if (input_text.value) {
-                    eel.translate(input_text.value, src_lang.value, dest_lang.value);
-                    eel.expose(view_log_js);
-                    function view_log_js(text){
-                        result.value += text + '\n'; 
-                    }
+    </div>
+
+    <script type="text/javascript" src="./eel.js"></script>
+    <script>
+        translate.addEventListener('click', () => {
+            if (input_text.value) {
+                eel.translate(input_text.value, src_lang.value, dest_lang.value);
+                eel.expose(view_log_js);
+                function view_log_js(text) {
+                    result.value = text + '\n';
                 }
-            });
-        </script>
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <!-- Input Validation Check -->
-        <script>
-            // Example starter JavaScript for disabling form submissions if there are invalid fields
-            (function() {
-              'use strict';
-              window.addEventListener('load', function() {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
-                console.log(forms);
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function(form) {
-                    translate.addEventListener('click', function(event) {
-                    if (form.checkValidity() === false) {
-                      event.preventDefault();
-                      event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                  }, false);
-                });
-              }, false);
-            })();
-        </script>
-    </body>
+            }
+        });
+    </script>
+    <script>
+        reset.addEventListener('click', () => {
+            if (input_text.value) {
+                input_text.value = '';
+                result.value = '';
+            }
+        });
+    </script>
+    <script>
+        reset.addEventListener('click', () => {
+            if (input_text.value) {
+                input_text.value = '';
+                result.value = '';
+            }
+        });
+    </script>
+    <script>
+        exchange.addEventListener('click', () => {
+            let tmp = src_lang.value;
+            src_lang.value = dest_lang.value;
+            dest_lang.value = tmp;
+        });
+    </script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
 </html>
